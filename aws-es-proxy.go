@@ -162,6 +162,9 @@ func (p *proxy) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 		// AWS credentials expired, need to generate fresh ones
 		if resp.StatusCode == 403 {
 			p.credentials = nil
+			log.Println("received 403 Forbidden as proxy response")
+			w.WriteHeader(403)
+			io.Copy(w, resp.Body)
 			return
 		}
 	}
