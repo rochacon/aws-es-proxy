@@ -18,6 +18,7 @@ COPY --from=0 /go/src/github.com/abutaha/aws-es-proxy/aws-es-proxy /usr/local/bi
 
 ENV PORT_NUM 9200
 EXPOSE ${PORT_NUM}
+USER nobody
 
 ENTRYPOINT ["aws-es-proxy"] 
 CMD ["-h"]
